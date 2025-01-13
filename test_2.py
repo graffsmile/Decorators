@@ -1,7 +1,4 @@
-import os
-import time
 from datetime import datetime
-
 import os
 from time import sleep
 
