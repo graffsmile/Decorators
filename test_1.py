@@ -6,13 +6,14 @@ def logger(old_function):
 
     def new_function(*args, **kwargs):
         path = 'main.log'
-        start = datetime.now()
+        # start = datetime.now()
+        start = datetime.now().strftime('%d-%m-%Y время %H:%M:%S')
         return_value = old_function(*args, **kwargs)
-        end = datetime.now()
-        # print(f'Время выполнения функции {old_function.__name__}: {end - start} секунд.')
-        with open(path, 'w') as f:
-            f.write(f'Результат функции {old_function.__name__}: {return_value}\n')
-            f.write(f'Время выполнения функции {old_function.__name__}: {end - start} секунд')
+        with open(path, 'a+', encoding='utf-8') as f:
+            f.write(f'Дата вызова функции: {start}. '
+                    f'Имя функции: {old_function.__name__}. '
+                    f'Аргументы: {args}, {kwargs}, '
+                    f'Значение функции: {return_value}\n')
         return return_value
     return new_function
 
@@ -45,7 +46,7 @@ def test_1():
     summator(4.3, b=2.2)
     summator(a=2, b=3)
 
-    with open(path) as log_file:
+    with open(path, encoding='utf-8') as log_file:
         log_file_content = log_file.read()
 
     assert 'summator' in log_file_content, 'должно записаться имя функции'
