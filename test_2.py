@@ -2,7 +2,6 @@ from datetime import datetime
 import os
 from functools import wraps
 from time import sleep
-from functools import wraps
 
 def logger(path):
     def __logger(old_function):
