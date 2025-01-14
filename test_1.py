@@ -8,13 +8,13 @@ def logger(old_function):
         path = 'main.log'
         # start = datetime.now()
         start = datetime.now().strftime('%d-%m-%Y время %H:%M:%S')
-        return_value = old_function(*args, **kwargs)
+        result = old_function(*args, **kwargs)
         with open(path, 'a+', encoding='utf-8') as f:
             f.write(f'Дата вызова функции: {start}. '
                     f'Имя функции: {old_function.__name__}. '
                     f'Аргументы: {args}, {kwargs}, '
-                    f'Значение функции: {return_value}\n')
-        return return_value
+                    f'Значение функции: {result}\n')
+        return result
     return new_function
 
 def test_1():
